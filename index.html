@@ -13,7 +13,7 @@
   <div id="graph"></div>
 
   <script>
-    fetch("testdata.json")
+    fetch("large_channel_data.json")
       .then((res) => res.json())
       .then((data) => {
         const Graph = ForceGraph()(document.getElementById("graph"))
