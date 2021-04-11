@@ -1,130 +1,639 @@
-<head>
-  <style>
-    body {
-      margin: 0;
-    }
-  </style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//unpkg.com/force-graph"></script>
+    <style>
+      @font-face {
+        font-family: Whyte;
+        src: url(ABCWhyteEdu-Bold.otf);
+      }
 
-  <script src="//unpkg.com/force-graph"></script>
-  <!--<script src="../../dist/force-graph.js"></script>-->
-</head>
+      @font-face {
+        font-family: Favorit;
+        src: url(ABCFavoritEdu-Bold.otf);
+      }
 
-<body>
-  <div id="graph"></div>
+      @font-face {
+        font-family: Diatype;
+        src: url(ABCDiatypeEdu-Regular.otf);
+      }
 
-  <script>
-    fetch("large_channel_data.json")
-      .then((res) => res.json())
-      .then((gData) => {
-        gData.links.forEach(link => {
-          // console.log(gData)
-          // console.log(link)
-          const a = gData.nodes.find(o => o.id === link.source);
-          const b = gData.nodes.find(o => o.id === link.target);
-          // console.log(link.source)
-          // console.log(link.target)
-          // console.log(a)
-          // console.log(b)
-          !a.neighbors && (a.neighbors = []);
-          !b.neighbors && (b.neighbors = []);
-          a.neighbors.push(b);
-          b.neighbors.push(a);
+      body {
+        /* background-color: #e5e5e5; */
+        background: linear-gradient(
+            179.82deg,
+            rgba(255, 255, 248, 0.4) 7.01%,
+            rgba(254, 241, 237, 0.4) 49.08%,
+            rgba(229, 233, 251, 0.4) 99.84%
+          ),
+          linear-gradient(180deg, rgba(255, 255, 255, 0) 9.25%, #ffffff 34.93%),
+          #fefef6;
+        background-attachment: fixed;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <!-- <body style="background-color: #e5e5e5"> -->
+  <body>
+    <!-- <img src="hr.png" width="248" /> -->
+    <div
+      id="relationshipsPill"
+      style="
+        width: 393px;
+        height: 364px;
+        /* border-style: dotted; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 10px;
+      "
+    >
+      <h1
+        style="
+          font-family: Favorit;
+          font-size: 11pt;
+          position: absolute;
+          top: -1px;
+          left: 13.5px;
+          color: #3f3f3f;
+        "
+      >
+        Relationship Analysis
+      </h1>
+      <h1
+        style="
+          font-family: Whyte;
+          font-size: 17pt;
+          position: absolute;
+          top: 10px;
+          left: 13.5px;
+          color: #242424;
+        "
+      >
+        4,503<span style="font-size: 10pt;"> links</span>
+      </h1>
+      <h2
+        style="
+          font-family: Whyte;
+          font-size: 7.5pt;
+          position: absolute;
+          top: 47px;
+          left: 13.5px;
+          color: #00c72c;
+        "
+      >
+        +203 links &nbsp; +5 nodes
+      </h2>
+      <h3
+        style="
+          font-family: Diatype;
+          font-size: 9pt;
+          position: absolute;
+          top: -2px;
+          right: 12.5px;
+          color: lightgray;
+        "
+      >
+        Last two weeks
+      </h3>
+      <div
+        id="relationshipGraph"
+        style="
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        width: 370px;
+        height: 270px;
+        right: 12.5px; 
+        background-color: white;
+        overflow: hidden;
+        border-radius: 10px;
+        "
+      ></div>
+    </div>
+    <div
+      id="useractivityPill"
+      style="
+        width: 248px;
+        height: 139px;
+        /* border-style: dotted; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 10px;
+      "
+    >
+      <h1
+        style="
+          font-family: Favorit;
+          font-size: 11pt;
+          position: absolute;
+          top: -1px;
+          left: 13.5px;
+          color: #3f3f3f;
+        "
+      >
+        User Activity
+      </h1>
+      <h1
+        style="
+          font-family: Whyte;
+          font-size: 17pt;
+          position: absolute;
+          top: 10px;
+          left: 13.5px;
+          color: #242424;
+        "
+      >
+        12,893<span style="font-size: 10pt;">pts</span>
+      </h1>
+      <h2
+        style="
+          font-family: Whyte;
+          font-size: 7.5pt;
+          position: absolute;
+          top: 47px;
+          left: 13.5px;
+          color: #00c72c;
+        "
+      >
+        +10% up
+      </h2>
+      <h3
+        style="
+          font-family: Diatype;
+          font-size: 9pt;
+          position: absolute;
+          top: -2px;
+          right: 12.5px;
+          color: lightgray;
+        "
+      >
+        Last 30 days
+      </h3>
+      <canvas
+        id="useractivityData"
+        height="69px"
+        width="260px"
+        style="position: absolute; bottom: -8px; left: -8px;"
+      ></canvas>
+    </div>
+    <div
+      id="messageperhourPill"
+      style="
+        width: 248px;
+        height: 139px;
+        /* border-style: dotted; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 20px;
+      "
+    >
+      <h1
+        style="
+          font-family: Favorit;
+          font-size: 11pt;
+          position: absolute;
+          top: -1px;
+          left: 13.5px;
+          color: #3f3f3f;
+        "
+      >
+        Messages/hr
+      </h1>
+      <h1
+        style="
+          font-family: Whyte;
+          font-size: 17pt;
+          position: absolute;
+          top: 10px;
+          left: 13.5px;
+          color: #242424;
+        "
+      >
+        23<span style="font-size: 10pt;">msg</span>
+      </h1>
+      <h2
+        style="
+          font-family: Whyte;
+          font-size: 7.5pt;
+          position: absolute;
+          top: 47px;
+          left: 13.5px;
+          color: #00c72c;
+        "
+      >
+        +10% average
+      </h2>
+      <h3
+        style="
+          font-family: Diatype;
+          font-size: 9pt;
+          position: absolute;
+          top: -2px;
+          right: 12.5px;
+          color: lightgray;
+        "
+      >
+        Current
+      </h3>
+      <canvas
+        id="messageperhourData"
+        height="69px"
+        width="260px"
+        style="position: absolute; bottom: -8px; left: -8px;"
+      ></canvas>
+    </div>
+    <div
+      id="serverrankPill"
+      style="
+        width: 248px;
+        height: 139px;
+        /* border-style: dotted; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 20px;
+      "
+    >
+      <h1
+        style="
+          font-family: Favorit;
+          font-size: 11pt;
+          position: absolute;
+          top: -1px;
+          left: 13.5px;
+          color: #3f3f3f;
+        "
+      >
+        Server Ranking
+      </h1>
+      <h1
+        style="
+          font-family: Whyte;
+          font-size: 17pt;
+          position: absolute;
+          top: 10px;
+          left: 13.5px;
+          color: #242424;
+        "
+      >
+        904,342<span style="font-size: 10pt;">st</span>
+      </h1>
+      <h2
+        style="
+          font-family: Whyte;
+          font-size: 7.5pt;
+          position: absolute;
+          top: 47px;
+          left: 13.5px;
+          color: #00c72c;
+        "
+      >
+        +1.2% gain
+      </h2>
+      <h3
+        style="
+          font-family: Diatype;
+          font-size: 9pt;
+          position: absolute;
+          top: -2px;
+          right: 12.5px;
+          color: lightgray;
+        "
+      >
+        Year To Date
+      </h3>
+      <canvas
+        id="serverrankData"
+        height="69px"
+        width="260px"
+        style="position: absolute; bottom: -8px; left: -8px;"
+      ></canvas>
+    </div>
+    <div
+      id="membercountPill"
+      style="
+        width: 248px;
+        height: 139px;
+        /* border-style: dotted; */
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 20px;
+      "
+    >
+      <h1
+        style="
+          font-family: Favorit;
+          font-size: 11pt;
+          position: absolute;
+          top: -1px;
+          left: 13.5px;
+          color: #3f3f3f;
+        "
+      >
+        Member Count
+      </h1>
+      <h1
+        style="
+          font-family: Whyte;
+          font-size: 17pt;
+          position: absolute;
+          top: 10px;
+          left: 13.5px;
+          color: #242424;
+        "
+      >
+        90,203<span style="font-size: 10pt;"></span>
+      </h1>
+      <h2
+        style="
+          font-family: Whyte;
+          font-size: 7.5pt;
+          position: absolute;
+          top: 47px;
+          left: 13.5px;
+          color: #DD2E44;
+        "
+      >
+        -10% down
+      </h2>
+      <h3
+        style="
+          font-family: Diatype;
+          font-size: 9pt;
+          position: absolute;
+          top: -2px;
+          right: 12.5px;
+          color: lightgray;
+        "
+      >
+        Last 30 days
+      </h3>
+      <canvas
+        id="membercountData"
+        height="69px"
+        width="260px"
+        style="position: absolute; bottom: -8px; left: -8px;"
+      ></canvas>
+    </div>
+    <div
+      id="memberprojPill"
+      style="
+      width: 248px;
+      height: 139px;
+      /* border-style: dotted; */
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 3px 3px 0px lightgray;
+      background-color: white;
+      margin-top: 20px;
+    "
+    >
+      <h1
+        style="
+        font-family: Favorit;
+        font-size: 11pt;
+        position: absolute;
+        top: -1px;
+        left: 13.5px;
+        color: #3f3f3f;
+      "
+      >
+        Member Projections
+      </h1>
+      <h1
+        style="
+        font-family: Whyte;
+        font-size: 17pt;
+        position: absolute;
+        top: 10px;
+        left: 13.5px;
+        color: #242424;
+      "
+      >
+        104,531<span style="font-size: 10pt;"> by Sept</span>
+      </h1>
+      <h2
+        style="
+        font-family: Whyte;
+        font-size: 7.5pt;
+        position: absolute;
+        top: 47px;
+        left: 13.5px;
+        color: #00c72c;
+      "
+      >
+        +15.8% gain
+      </h2>
+      <h3
+        style="
+        font-family: Diatype;
+        font-size: 9pt;
+        position: absolute;
+        top: -2px;
+        right: 12.5px;
+        color: lightgray;
+      "
+      >
+        Q4 Results
+      </h3>
+      <canvas
+        id="memberprojData"
+        height="69px"
+        width="260px"
+        style="position: absolute; bottom: -8px; left: -8px;"
+      ></canvas>
+    </div>
+    <script src="relationships.js" type="text/javascript"></script>
+    <script>
+      var olddata = [12, 19, 3, 5, 2, 3, 19, 3, 5, 2, 3, 19, 3, 5, 2, 1, 4, 19];
+      var data = [0, 0, 1, 3, 3, 25, 23, 6, 9, 5, 1, 0, 28, 48, 19, 12, 37, 4];
+      var stabledata = [2, 4, 3, 5, 2, 3, 5, 3, 5, 2, 3, 5, 3, 5, 2, 1, 4, 6];
+      var projections = [90203, 104531];
 
-          !a.links && (a.links = []);
-          !b.links && (b.links = []);
-          a.links.push(link);
-          b.links.push(link);
+      var messageHr = {
+        id: "messageperhourData",
+        name: "messageperhourPill",
+        data: data,
+        linecolor: "#55ACEE",
+        fillcolor: "#55ACEE",
+        linewidth: 5,
+      };
+      var userActivity = {
+        id: "useractivityData",
+        name: "useractivityPill",
+        data: olddata,
+        linecolor: "#55ACEE",
+        fillcolor: "#D7EEFF",
+        linewidth: 3,
+      };
+      var serverRank = {
+        id: "serverrankData",
+        name: "serverrankPill",
+        data: stabledata,
+        linecolor: "#DA3939",
+        fillcolor: "#FFC6C6",
+        linewidth: 2,
+        tension: 0,
+        clearance: 0.1,
+      };
+      var memberCount = {
+        id: "membercountData",
+        name: "membercountPill",
+        data: stabledata,
+        linecolor: "#DA3939",
+        fillcolor: "#DA3939",
+        linewidth: 0,
+        tension: 0,
+        type: "bar",
+        clearance: 0.1,
+      };
+      var memberProjections = {
+        id: "memberprojData",
+        name: "memberprojPill",
+        data: projections,
+        linecolor: "#DA3939",
+        fillcolor: "#FFC6C6",
+        dash: [10, 5],
+      };
+      var pills = [
+        messageHr,
+        userActivity,
+        serverRank,
+        memberCount,
+        memberProjections,
+      ];
+      for (pill of pills) {
+        var pillData = pill.data;
+        var pillLineColor = pill.linecolor;
+        var pillFillColor = pill.fillcolor;
+        var dashSettings = pill.dash ? pill.dash : [0, 0];
+        var lineWidth = pill.linewidth;
+        var tensionx = pill.tension !== undefined ? pill.tension : 0.35;
+        var type = pill.type ? pill.type : "line";
+        var min = -1;
+        var max = -1;
+        var smallest = 10000000000;
+        var largest = 0;
+        var shifted = false;
+        var labels = [];
+        for (let i = 1; i <= pill.data.length; i++) {
+          labels.push(i);
+        }
+        console.log(labels);
+        for (point of pillData) {
+          if (point > largest) {
+            largest = point;
+          }
+          if (point < smallest) {
+            smallest = point;
+          }
+        }
+        var clearancepercent =
+          pill.clearance !== undefined ? pill.clearance : 0.2;
+        var range = largest - smallest;
+        var clearance = largest * 0.05;
+        var shiftup = range * 0.5;
+        // var shiftup = 20;
+        // shiftup = 10;
+        function update(inputdata, amount) {
+          var output = [];
+          for (point of inputdata) {
+            output.push(point + amount);
+          }
+          return output;
+        }
+        if (smallest < shiftup) {
+          shifted = true;
+          pillData = update(pillData, shiftup);
+          smallest += shiftup;
+          largest += shiftup;
+        }
+        min = smallest - shiftup;
+        max = largest + clearance;
+        console.log(pillData);
+        console.log(min);
+        console.log(max);
+        console.log(smallest);
+        console.log(largest);
+        // ("#55ACEE");
+        var ctx = document.getElementById(pill.id).getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: type,
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                categoryPercentage: 1.0,
+                barPercentage: 1.0,
+                borderColor: pillLineColor,
+                borderWidth: lineWidth,
+                borderDash: dashSettings,
+                fill: true,
+                backgroundColor: pillFillColor,
+                data: pillData,
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            plugins: {
+              tooltip: {
+                enabled: false,
+              },
+              legend: {
+                display: false,
+              },
+            },
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+            tension: tensionx,
+            scales: {
+              y: {
+                min: min,
+                max: max,
+                // beginAtZero: true,
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                },
+              },
+              x: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                },
+              },
+            },
+          },
         });
-        const NODE_R = 8;
-        const highlightNodes = new Set();
-        const highlightLinks = new Set();
-        let hoverNode = null;
-
-        const elem = document.getElementById('graph');
-
-        const Graph = ForceGraph()(document.getElementById("graph"))
-          .graphData(gData)
-          .nodeId("id")
-          // .nodeAutoColorBy("group")
-          // .nodeRelSize(NODE_R)
-          .onNodeHover(node => {
-            highlightNodes.clear();
-            highlightLinks.clear();
-            if (node) {
-              try {
-              highlightNodes.add(node);
-              node.neighbors.forEach(neighbor => highlightNodes.add(neighbor));
-              node.links.forEach(link => highlightLinks.add(link));
-              }
-              catch {
-                console.error("empty node error")
-              }
-            }
-    
-            hoverNode = node || null;
-            elem.style.cursor = node ? '-webkit-grab' : null;
-          })
-          .onLinkHover(link => {
-            highlightNodes.clear();
-            highlightLinks.clear();
-    
-            if (link) {
-              highlightLinks.add(link);
-              highlightNodes.add(link.source);
-              highlightNodes.add(link.target);
-            }
-          })
-          .linkWidth(link => highlightLinks.has(link) ? 5 : 1)
-          .linkDirectionalParticles(2)
-          .linkDirectionalParticleWidth(link => highlightLinks.has(link) ? 4 : 0)
-          .nodeCanvasObject((node, ctx, globalScale) => {
-            const label = node.id;
-            const fontSize = 12 / globalScale;
-            ctx.font = `${fontSize}px Sans-Serif`;
-            const textWidth = ctx.measureText(label).width;
-            const bckgDimensions = [textWidth, fontSize].map(
-              (n) => n + fontSize * 0.2
-            ); // some padding
-
-            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-            ctx.fillRect(
-              node.x - bckgDimensions[0] / 2,
-              node.y - bckgDimensions[1] / 2,
-              ...bckgDimensions
-            );
-            if (highlightNodes.size !== 0) {console.log(highlightNodes)}
-            // if (highlightNodes.has(node)) {
-            // ctx.beginPath();
-            // ctx.arc(node.x, node.y, NODE_R * 0.4, 0, 2 * Math.PI, false);
-            // ctx.fillStyle = node === hoverNode ? 'red' : 'red';
-            // ctx.fill();
-            // }
-
-            if (highlightNodes.has(node)) {
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillStyle = "red";
-            ctx.fillText(label, node.x, node.y);
-            } else {
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              ctx.fillStyle = "blue";
-              ctx.fillText(label, node.x, node.y);
-            }
-            
-
-            node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
-          })
-          .nodePointerAreaPaint((node, color, ctx) => {
-            ctx.fillStyle = color;
-            const bckgDimensions = node.__bckgDimensions;
-            bckgDimensions &&
-              ctx.fillRect(
-                node.x - bckgDimensions[0] / 2,
-                node.y - bckgDimensions[1] / 2,
-                ...bckgDimensions
-              );
-        });
-      });
-  </script>
-</body>
+      }
+    </script>
+  </body>
+</html>
