@@ -22,6 +22,11 @@
       }
 
       @font-face {
+        font-family: FavoritReg;
+        src: url(ABCFavoritEdu-Regular.otf);
+      }
+
+      @font-face {
         font-family: Diatype;
         src: url(ABCDiatypeEdu-Regular.otf);
       }
@@ -75,27 +80,121 @@
         background: #4caf50;
         cursor: pointer;
       }
-    </style>
-  </head>
-  <!-- <body style="background-color: #e5e5e5"> -->
-  <body>
-    <!-- <img src="hr.png" width="248" /> -->
-    <div
-      id="useractivityPill"
-      style="
-        width: 248px;
-        height: 139px;
-        /* border-style: dotted; */
+
+      #messageContent {
+        font-family: FavoritReg;
+        font-size: 9pt;
         position: relative;
+        top: 3px;
+        color: #a9a9a9;
+        margin: 0px;
+      }
+
+      #messageAge {
+        font-family: Favorit;
+        font-size: 9pt;
+        position: relative;
+        color: #d2d2d2;
+        left: 15px;
         float: left;
+        margin: 0px;
+      }
+
+      #messageName {
+        font-family: Favorit;
+        font-size: 9pt;
+        position: relative;
+        color: #585858;
+        float: left;
+        margin: 0px;
+      }
+
+      #messageTitle {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 0px;
+      }
+
+      #message {
+        position: relative;
+        display: flex;
+        margin-bottom: 15px;
+        flex-direction: column;
+        /* padding-bottom: 30px; */
+        min-height: 10px;
+        height: auto;
+        width: 345px;
+      }
+
+      #flaggedmessagesFeed::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      #flaggedmessagesFeed {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      #pillRange {
+        font-family: Diatype;
+        font-size: 9pt;
+        position: absolute;
+        top: -2px;
+        right: 12.5px;
+        color: lightgray;
+      }
+
+      #pillTitle {
+      }
+
+      #pillNumber {
+      }
+
+      #pillDiff {
+      }
+
+      #pillTitleBig {
+        font-family: Favorit;
+        font-size: 13pt;
+        position: absolute;
+        top: -1px;
+        left: 13.5px;
+        color: #3f3f3f;
+      }
+
+      .pill {
+        position: relative;
         overflow: hidden;
         border-radius: 10px;
         box-shadow: 3px 3px 0px lightgray;
         background-color: white;
         margin-top: 20px;
         margin-left: 20px;
-      "
-    >
+        float: left;
+      }
+
+      .pillDataStandard {
+        width: 248px;
+        height: 139px;
+      }
+
+      .pillFlagged {
+        width: 399px;
+        height: 297px;
+      }
+
+      .pillRelationships {
+        width: 393px;
+        height: 364px;
+      }
+    </style>
+  </head>
+  <!-- <body style="background-color: #e5e5e5"> -->
+  <body>
+    <!-- <img src="hr.png" width="248" /> -->
+    <div id="useractivityPill" class="pill pillDataStandard">
       <h1
         style="
           font-family: Favorit;
@@ -151,22 +250,7 @@
         style="position: absolute; bottom: -8px; left: -8px"
       ></canvas>
     </div>
-    <div
-      id="messageperhourPill"
-      style="
-        width: 248px;
-        height: 139px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        float: left;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-      "
-    >
+    <div id="messageperhourPill" class="pill pillDataStandard">
       <h1
         style="
           font-family: Favorit;
@@ -222,22 +306,7 @@
         style="position: absolute; bottom: -8px; left: -8px"
       ></canvas>
     </div>
-    <div
-      id="serverrankPill"
-      style="
-        width: 248px;
-        height: 139px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-        float: left;
-      "
-    >
+    <div id="serverrankPill" class="pill pillDataStandard">
       <h1
         style="
           font-family: Favorit;
@@ -293,22 +362,7 @@
         style="position: absolute; bottom: -8px; left: -8px"
       ></canvas>
     </div>
-    <div
-      id="membercountPill"
-      style="
-        width: 248px;
-        height: 139px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-        float: left;
-      "
-    >
+    <div id="membercountPill" class="pill pillDataStandard">
       <h1
         style="
           font-family: Favorit;
@@ -364,22 +418,7 @@
         style="position: absolute; bottom: -8px; left: -8px"
       ></canvas>
     </div>
-    <div
-      id="memberprojPill"
-      style="
-        width: 248px;
-        height: 139px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-        float: left;
-      "
-    >
+    <div id="memberprojPill" class="pill pillDataStandard">
       <h1
         style="
           font-family: Favorit;
@@ -435,46 +474,9 @@
         style="position: absolute; bottom: -8px; left: -8px"
       ></canvas>
     </div>
-    <div
-      id="flaggedmessagesPill"
-      style="
-        width: 399px;
-        height: 297px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-        float: left;
-      "
-    >
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 13pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Flagged Messages
-      </h1>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Live Chat
-      </h3>
+    <div id="flaggedmessagesPill" class="pill pillFlagged">
+      <h1 id="pillTitleBig">Flagged Messages</h1>
+      <h3 id="pillRange">Live Chat</h3>
       <div
         class="slidecontainer"
         width="133px"
@@ -496,31 +498,63 @@
           position: absolute;
           left: 12px;
           top: 55px;
-          width: 373px;
+          width: 363px;
           height: 204px;
-
           background-color: #f9f9f9;
           overflow: hidden;
+          padding-left: 15px;
+          padding-top: 2px;
           border-radius: 10px;
+          overflow: scroll;
         "
-      ></div>
+      >
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">Andrew Goodridge</h3>
+            <h3 id="messageAge">15 min ago</h3>
+          </div>
+          <p id="messageContent">
+            i hope you get vitamin D deficiency fool - this is a generic toxic
+            message that our AI would flag
+          </p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">Fredrick Douglass</h3>
+            <h3 id="messageAge">11 min ago</h3>
+          </div>
+          <p id="messageContent">
+            i hate you, i want to kill you, give me 200$ dollars is the best dr.
+            phil quote ever. - lol
+          </p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">notch</h3>
+            <h3 id="messageAge">5 min ago</h3>
+          </div>
+          <p id="messageContent">fuck off</p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">Lords of Plural</h3>
+            <h3 id="messageAge">1 min ago</h3>
+          </div>
+          <p id="messageContent">
+            Stop being british or I’ll throw your tea into the ocean. - lol no
+            im not joking im being toxic.
+          </p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">Lords of Plural</h3>
+            <h3 id="messageAge">1 min ago</h3>
+          </div>
+          <p id="messageContent">go suck some unwashed toes you cretin</p>
+        </div>
+      </div>
     </div>
-    <div
-      id="relationshipsPill"
-      style="
-        width: 393px;
-        height: 364px;
-        /* border-style: dotted; */
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 3px 3px 0px lightgray;
-        background-color: white;
-        margin-top: 20px;
-        margin-left: 20px;
-        float: left;
-      "
-    >
+    <div id="relationshipsPill" class="pill pillRelationships">
       <h1
         style="
           font-family: Favorit;
