@@ -137,7 +137,7 @@
         scrollbar-width: none; /* Firefox */
       }
 
-      #pillRange {
+      .pillDesc {
         font-family: Diatype;
         font-size: 9pt;
         position: absolute;
@@ -146,22 +146,42 @@
         color: lightgray;
       }
 
-      #pillTitle {
-      }
-
-      #pillNumber {
-      }
-
-      #pillDiff {
-      }
-
-      #pillTitleBig {
+      .pillTitle {
         font-family: Favorit;
-        font-size: 13pt;
+        font-size: 11pt;
         position: absolute;
         top: -1px;
         left: 13.5px;
         color: #3f3f3f;
+      }
+
+      .pillNumber {
+        font-family: Whyte;
+        font-size: 17pt;
+        position: absolute;
+        top: 10px;
+        left: 13.5px;
+        color: #242424;
+      }
+
+      .pillDiff {
+        font-family: Whyte;
+        font-size: 7.5pt;
+        position: absolute;
+        top: 47px;
+        left: 13.5px;
+      }
+
+      .pillDiffGood {
+        color: #00c72c;
+      }
+
+      .pillDiffBad {
+        color: #dd2e44;
+      }
+
+      .pillTitleBig {
+        font-size: 13pt;
       }
 
       .pill {
@@ -182,12 +202,44 @@
 
       .pillFlagged {
         width: 399px;
-        height: 297px;
+        height: 308px;
       }
 
       .pillRelationships {
         width: 393px;
         height: 364px;
+      }
+
+      .pillDataCanvas {
+        position: absolute;
+        bottom: -8px;
+        left: -8px;
+      }
+
+      #relationshipGraph {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        width: 370px;
+        height: 270px;
+        right: 12.5px;
+        background-color: white;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+
+      #flaggedmessagesFeed {
+        position: absolute;
+        left: 12px;
+        top: 55px;
+        width: 360px;
+        height: 204px;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        padding-left: 15px;
+        padding-top: 12px;
+        border-radius: 10px;
+        overflow: scroll;
       }
     </style>
   </head>
@@ -195,54 +247,10 @@
   <body>
     <!-- <img src="hr.png" width="248" /> -->
     <div id="useractivityPill" class="pill pillDataStandard">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        User Activity
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
-        12,893<span style="font-size: 10pt">pts</span>
-      </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #00c72c;
-        "
-      >
-        +10% up
-      </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Last 30 days
-      </h3>
+      <h1 class="pillTitle">User Activity</h1>
+      <h1 class="pillNumber">12,893<span style="font-size: 10pt">pts</span></h1>
+      <h2 class="pillDiff pillDiffGood">+10% up</h2>
+      <h3 class="pillDesc">Last 30 days</h3>
       <canvas
         id="useractivityData"
         height="69px"
@@ -251,54 +259,10 @@
       ></canvas>
     </div>
     <div id="messageperhourPill" class="pill pillDataStandard">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Messages/hr
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
-        23<span style="font-size: 10pt">msg</span>
-      </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #00c72c;
-        "
-      >
-        +10% average
-      </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Current
-      </h3>
+      <h1 class="pillTitle">Messages/hr</h1>
+      <h1 class="pillNumber">23<span style="font-size: 10pt">msg</span></h1>
+      <h2 class="pillDiff pillDiffGood">+10% average</h2>
+      <h3 class="pillDesc">Current</h3>
       <canvas
         id="messageperhourData"
         height="69px"
@@ -307,54 +271,10 @@
       ></canvas>
     </div>
     <div id="serverrankPill" class="pill pillDataStandard">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Server Ranking
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
-        904,342<span style="font-size: 10pt">st</span>
-      </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #00c72c;
-        "
-      >
-        +1.2% gain
-      </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Year To Date
-      </h3>
+      <h1 class="pillTitle">Server Ranking</h1>
+      <h1 class="pillNumber">904,342<span style="font-size: 10pt">st</span></h1>
+      <h2 class="pillDiff pillDiffGood">+1.2% gain</h2>
+      <h3 class="pillDesc">Year To Date</h3>
       <canvas
         id="serverrankData"
         height="69px"
@@ -363,54 +283,10 @@
       ></canvas>
     </div>
     <div id="membercountPill" class="pill pillDataStandard">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Member Count
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
-        90,203<span style="font-size: 10pt"></span>
-      </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #dd2e44;
-        "
-      >
-        -10% down
-      </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Last 30 days
-      </h3>
+      <h1 class="pillTitle">Member Count</h1>
+      <h1 class="pillNumber">90,203<span style="font-size: 10pt"></span></h1>
+      <h2 class="pillDiff pillDiffBad">-10% down</h2>
+      <h3 class="pillDesc">Last 30 days</h3>
       <canvas
         id="membercountData"
         height="69px"
@@ -419,64 +295,22 @@
       ></canvas>
     </div>
     <div id="memberprojPill" class="pill pillDataStandard">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Member Projections
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
+      <h1 class="pillTitle">Member Projections</h1>
+      <h1 class="pillNumber">
         104,531<span style="font-size: 10pt"> by Sept</span>
       </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #00c72c;
-        "
-      >
-        +15.8% gain
-      </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Q4 Results
-      </h3>
+      <h2 class="pillDiff pillDiffGood">+15.8% gain</h2>
+      <h3 class="pillDesc">Q4 Results</h3>
       <canvas
         id="memberprojData"
         height="69px"
         width="260px"
-        style="position: absolute; bottom: -8px; left: -8px"
+        class="pillDataCanvas"
       ></canvas>
     </div>
     <div id="flaggedmessagesPill" class="pill pillFlagged">
-      <h1 id="pillTitleBig">Flagged Messages</h1>
-      <h3 id="pillRange">Live Chat</h3>
+      <h1 class="pillTitle pillTitleBig">Flagged Messages</h1>
+      <h3 class="pillDesc">Live Chat</h3>
       <div
         class="slidecontainer"
         width="133px"
@@ -489,25 +323,9 @@
           value="72"
           class="slider"
           id="myRange"
-          disabled="true"
         />
       </div>
-      <div
-        id="flaggedmessagesFeed"
-        style="
-          position: absolute;
-          left: 12px;
-          top: 55px;
-          width: 363px;
-          height: 204px;
-          background-color: #f9f9f9;
-          overflow: hidden;
-          padding-left: 15px;
-          padding-top: 2px;
-          border-radius: 10px;
-          overflow: scroll;
-        "
-      >
+      <div id="flaggedmessagesFeed">
         <div id="message">
           <div id="messageTitle">
             <h3 id="messageName">Andrew Goodridge</h3>
@@ -552,45 +370,54 @@
           </div>
           <p id="messageContent">go suck some unwashed toes you cretin</p>
         </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">santiarr</h3>
+            <h3 id="messageAge">now</h3>
+          </div>
+          <p id="messageContent">i don't like hispanic people</p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">FredrickDouglass</h3>
+            <h3 id="messageAge">now</h3>
+          </div>
+          <p id="messageContent">
+            wow pretty racist you should go evaluate your personal biases
+            motherfucker.
+          </p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">dexter</h3>
+            <h3 id="messageAge">now</h3>
+          </div>
+          <p id="messageContent">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+        </div>
+        <div id="message">
+          <div id="messageTitle">
+            <h3 id="messageName">Jeffrey Bezos</h3>
+            <h3 id="messageAge">now</h3>
+          </div>
+          <p id="messageContent">
+            what the fuck dexter - how do you know latin
+          </p>
+        </div>
       </div>
     </div>
     <div id="relationshipsPill" class="pill pillRelationships">
-      <h1
-        style="
-          font-family: Favorit;
-          font-size: 11pt;
-          position: absolute;
-          top: -1px;
-          left: 13.5px;
-          color: #3f3f3f;
-        "
-      >
-        Relationship Analysis
-      </h1>
-      <h1
-        style="
-          font-family: Whyte;
-          font-size: 17pt;
-          position: absolute;
-          top: 10px;
-          left: 13.5px;
-          color: #242424;
-        "
-      >
+      <h1 class="pillTitle">Relationship Analysis</h1>
+      <h1 class="pillNumber">
         4,503<span style="font-size: 10pt"> links</span>
       </h1>
-      <h2
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 47px;
-          left: 13.5px;
-          color: #00c72c;
-        "
-      >
-        +203 links &nbsp; +5 nodes
-      </h2>
+      <h2 class="pillDiff pillDiffGood">+203 links &nbsp; +5 nodes</h2>
       <h2
         id="loadingstatus"
         style="
@@ -605,32 +432,8 @@
       >
         Live <span style="font-size: 6.5pt">•</span>
       </h2>
-      <h3
-        style="
-          font-family: Diatype;
-          font-size: 9pt;
-          position: absolute;
-          top: -2px;
-          right: 12.5px;
-          color: lightgray;
-        "
-      >
-        Last two weeks
-      </h3>
-      <div
-        id="relationshipGraph"
-        style="
-          position: absolute;
-          left: 12px;
-          bottom: 12px;
-          width: 370px;
-          height: 270px;
-          right: 12.5px;
-          background-color: white;
-          overflow: hidden;
-          border-radius: 10px;
-        "
-      ></div>
+      <h3 class="pillDesc">Last two weeks</h3>
+      <div id="relationshipGraph"></div>
     </div>
     <script src="relationships.js" type="text/javascript"></script>
     <script>
