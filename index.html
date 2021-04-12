@@ -202,7 +202,7 @@
 
       .pillFlagged {
         width: 399px;
-        height: 308px;
+        height: 323px;
       }
 
       .pillRelationships {
@@ -240,6 +240,22 @@
         padding-top: 12px;
         border-radius: 10px;
         overflow: scroll;
+      }
+
+      .responseBar {
+        position: absolute;
+        background-color: #ffffff;
+        max-width: 375px;
+        max-height: 32px;
+        top: 279px;
+        right: 12px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
       }
     </style>
   </head>
@@ -409,6 +425,21 @@
           <p id="messageContent">
             what the fuck dexter - how do you know latin
           </p>
+        </div>
+      </div>
+      <div id="responseBar" class="responseBar">
+        <div id="replyBox"></div>
+        <div id="ok" style="margin-right: 6px">
+          <img src="Group 49.svg" alt="This message is OK" />
+        </div>
+        <div id="warn" style="margin-right: 6px">
+          <img src="Group 50.svg" alt="Warn whoever said this" />
+        </div>
+        <div id="delete" style="margin-right: 6px">
+          <img src="Group 51.svg" alt="Delete this message" />
+        </div>
+        <div id="mute" style="margin-right: 6px">
+          <img src="Group 52.svg" alt="Mute whoever said this for 15 min" />
         </div>
       </div>
     </div>
