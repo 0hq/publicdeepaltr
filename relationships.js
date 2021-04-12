@@ -117,12 +117,23 @@ fetch("small.json")
     Graph.width = "370px";
     Graph.length = "270px";
     // Graph.centerAt(425, 600);
+    const pill = document.getElementById("loadingstatus");
     elem.addEventListener("mouseleave", (e) => {
       //   highlightNodes.clear();
       //   highlightLinks.clear();
+      document.getElementById("loadingstatus").style.color = '#D09521';
+      document.getElementById("loadingstatus").innerHTML = "Paused <span style='font-size: 6.5pt'>•</span>"
       Graph.pauseAnimation();
     });
     elem.addEventListener("mouseenter", (e) => {
+      document.getElementById("loadingstatus").style.color = '#21d048';
+      document.getElementById("loadingstatus").innerHTML = "Live <span style='font-size: 6.5pt'>•</span>"
       Graph.resumeAnimation();
     });
+    setTimeout(
+      function() {
+        document.getElementById("loadingstatus").style.color = '#D09521';
+      document.getElementById("loadingstatus").innerHTML = "Paused <span style='font-size: 6.5pt'>•</span>"
+      Graph.pauseAnimation();
+      }, 4000);
   });
