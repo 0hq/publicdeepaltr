@@ -30,6 +30,9 @@ fetch("small.json")
     const Graph = ForceGraph()(document.getElementById("relationshipGraph"))
       .graphData(gData)
       .nodeId("id")
+      .width(370)
+      .height(270)
+      .backgroundColor("#F9F9F9")
       // .nodeAutoColorBy("group")
       // .nodeRelSize(NODE_R)
       .onNodeHover((node) => {
@@ -71,7 +74,6 @@ fetch("small.json")
         const bckgDimensions = [textWidth, fontSize].map(
           (n) => n + fontSize * 0.2
         ); // some padding
-
         ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
         ctx.fillRect(
           node.x - bckgDimensions[0] / 2,
@@ -91,12 +93,12 @@ fetch("small.json")
         if (highlightNodes.has(node)) {
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.fillStyle = "red";
+          ctx.fillStyle = "#00c72c";
           ctx.fillText(label, node.x, node.y);
         } else {
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.fillStyle = "blue";
+          ctx.fillStyle = "#1C9DFF";
           ctx.fillText(label, node.x, node.y);
         }
 
@@ -112,7 +114,9 @@ fetch("small.json")
             ...bckgDimensions
           );
       });
-    Graph.centerAt(425, 600);
+    Graph.width = "370px";
+    Graph.length = "270px";
+    // Graph.centerAt(425, 600);
     elem.addEventListener("mouseleave", (e) => {
       //   highlightNodes.clear();
       //   highlightLinks.clear();
