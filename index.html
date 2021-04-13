@@ -10,7 +10,6 @@
         font-family: Whyte;
         src: url(ABCWhyteEdu-Bold.otf);
       }
-
       @font-face {
         font-family: WhyteBlack;
         src: url(ABCWhyteEdu-Black.otf);
@@ -246,9 +245,9 @@
         position: absolute;
         background-color: #ffffff;
         max-width: 375px;
-        max-height: 32px;
+        max-height: 38px;
         top: 279px;
-        right: 12px;
+        left: 12px;
         display: flex;
         flex-direction: row;
       }
@@ -256,6 +255,23 @@
       img {
         width: 35px;
         height: 35px;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+      }
+
+      input {
+        border: none;
+        width: 158px;
+        background-color: #f9f9f9;
+        font-family: Diatype;
+        color: #bfbfbf;
+        margin-top: 2px;
+        margin-left: 5px;
+        font-size: 12pt;
       }
     </style>
   </head>
@@ -417,7 +433,10 @@
             pariatur.
           </p>
         </div>
-        <div id="message">
+        <div
+          id="message"
+          style="background-color: #ffffff; margin-left: -6px; padding: 6px; border-radius: 5px;"
+        >
           <div id="messageTitle">
             <h3 id="messageName">Jeffrey Bezos</h3>
             <h3 id="messageAge">now</h3>
@@ -428,18 +447,51 @@
         </div>
       </div>
       <div id="responseBar" class="responseBar">
-        <div id="replyBox"></div>
-        <div id="ok" style="margin-right: 6px">
-          <img src="Group 49.svg" alt="This message is OK" />
+        <div
+          id="replyBox"
+          style="background-color: #f9f9f9; width: 200px; margin-right: 10px; margin-bottom: 2px; margin-top: 1px;border-radius: 8px; padding-top: 5px; padding: 5px;"
+        >
+          <input type="text" />
+          <img
+            class="sendbutton"
+            src="paper-plane (1) 1.svg"
+            alt="Send reply"
+            style="width:  18px; height: 18px; position: absolute; right: 185px; margin-top: 4px;"
+          />
+          <img
+            class="sendbuttonHighlighted"
+            src="paper-plane (1) 3.svg"
+            alt="Send reply"
+            style="width:  18px; height: 18px; position:absolute; right: 185px; margin-top: 4px; visibility: hidden;"
+          />
+        </div>
+        <div id="ok" style="margin-right: 6px;">
+          <img
+            src="Group 49.svg"
+            alt="This message is OK"
+            style="width:  35px; height: 35px;"
+          />
         </div>
         <div id="warn" style="margin-right: 6px">
-          <img src="Group 50.svg" alt="Warn whoever said this" />
+          <img
+            src="Group 50.svg"
+            alt="Warn whoever said this"
+            style="width:  35px; height: 35px;"
+          />
         </div>
         <div id="delete" style="margin-right: 6px">
-          <img src="Group 51.svg" alt="Delete this message" />
+          <img
+            src="Group 51.svg"
+            alt="Delete this message"
+            style="width:  35px; height: 35px;"
+          />
         </div>
         <div id="mute" style="margin-right: 6px">
-          <img src="Group 52.svg" alt="Mute whoever said this for 15 min" />
+          <img
+            src="Group 52.svg"
+            alt="Mute whoever said this for 15 min"
+            style="width:  35px; height: 35px;"
+          />
         </div>
       </div>
     </div>
