@@ -1,134 +1,281 @@
-<head>
-  <style>
-    body {
-      margin: 0;
-    }
-  </style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DeepALTR v1.0</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//unpkg.com/force-graph"></script>
+    <style>
+      @font-face {
+        font-family: Whyte;
+        src: url(ABCWhyteEdu-Bold.otf);
+      }
+      @font-face {
+        font-family: WhyteBlack;
+        src: url(ABCWhyteEdu-Black.otf);
+      }
 
-  <script src="//unpkg.com/force-graph"></script>
-  <!--<script src="../../dist/force-graph.js"></script>-->
-</head>
+      @font-face {
+        font-family: Favorit;
+        src: url(ABCFavoritEdu-Bold.otf);
+      }
 
-<body>
-  <div id="graph"></div>
+      @font-face {
+        font-family: FavoritReg;
+        src: url(ABCFavoritEdu-Regular.otf);
+      }
 
-  <script>
-    fetch("large_channel_data.json")
-      .then((res) => res.json())
-      .then((gData) => {
-        gData.links.forEach((link) => {
-          // console.log(gData)
-          // console.log(link)
-          const a = gData.nodes.find((o) => o.id === link.source);
-          const b = gData.nodes.find((o) => o.id === link.target);
-          // console.log(link.source)
-          // console.log(link.target)
-          // console.log(a)
-          // console.log(b)
-          !a.neighbors && (a.neighbors = []);
-          !b.neighbors && (b.neighbors = []);
-          a.neighbors.push(b);
-          b.neighbors.push(a);
+      @font-face {
+        font-family: Diatype;
+        src: url(ABCDiatypeEdu-Regular.otf);
+      }
 
-          !a.links && (a.links = []);
-          !b.links && (b.links = []);
-          a.links.push(link);
-          b.links.push(link);
-        });
-        const NODE_R = 8;
-        const highlightNodes = new Set();
-        const highlightLinks = new Set();
-        let hoverNode = null;
+      canvas#relationshipGraph {
+        background-color: #f9f9f9;
+      }
 
-        const elem = document.getElementById("graph");
+      body {
+        /* background-color: #e5e5e5; */
+        background: linear-gradient(
+            179.82deg,
+            rgba(255, 255, 248, 0.4) 7.01%,
+            rgba(254, 241, 237, 0.4) 49.08%,
+            rgba(229, 233, 251, 0.4) 99.84%
+          ),
+          linear-gradient(180deg, rgba(255, 255, 255, 0) 9.25%, #ffffff 34.93%),
+          #fefef6;
+        background-attachment: fixed;
+        height: 100%;
+        overflow: hidden;
+      }
 
-        const Graph = ForceGraph()(document.getElementById("graph"))
-          .graphData(gData)
-          .nodeId("id")
-          // .nodeAutoColorBy("group")
-          // .nodeRelSize(NODE_R)
-          .onNodeHover((node) => {
-            highlightNodes.clear();
-            highlightLinks.clear();
-            if (node) {
-              try {
-                highlightNodes.add(node);
-                node.neighbors.forEach((neighbor) =>
-                  highlightNodes.add(neighbor)
-                );
-                node.links.forEach((link) => highlightLinks.add(link));
-              } catch {
-                console.error("empty node error");
-              }
-            }
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 5px;
+        background: linear-gradient(to right, #99ffb0, #ff9999);
+        outline: none;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+      }
 
-            hoverNode = node || null;
-            elem.style.cursor = node ? "-webkit-grab" : null;
-          })
-          .onLinkHover((link) => {
-            highlightNodes.clear();
-            highlightLinks.clear();
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        border-color: #000000;
+        border-style: solid;
+        border-width: 3px;
+        background: #ffffff;
+        cursor: pointer;
+      }
 
-            if (link) {
-              highlightLinks.add(link);
-              highlightNodes.add(link.source);
-              highlightNodes.add(link.target);
-            }
-          })
-          .linkWidth((link) => (highlightLinks.has(link) ? 5 : 1))
-          .linkDirectionalParticles(2)
-          .linkDirectionalParticleWidth((link) =>
-            highlightLinks.has(link) ? 4 : 0
-          )
-          .nodeCanvasObject((node, ctx, globalScale) => {
-            const label = node.id;
-            const fontSize = 12 / globalScale;
-            ctx.font = `${fontSize}px Sans-Serif`;
-            const textWidth = ctx.measureText(label).width;
-            const bckgDimensions = [textWidth, fontSize].map(
-              (n) => n + fontSize * 0.2
-            ); // some padding
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4caf50;
+        cursor: pointer;
+      }
 
-            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-            ctx.fillRect(
-              node.x - bckgDimensions[0] / 2,
-              node.y - bckgDimensions[1] / 2,
-              ...bckgDimensions
-            );
-            if (highlightNodes.size !== 0) {
-              console.log(highlightNodes);
-            }
-            // if (highlightNodes.has(node)) {
-            // ctx.beginPath();
-            // ctx.arc(node.x, node.y, NODE_R * 0.4, 0, 2 * Math.PI, false);
-            // ctx.fillStyle = node === hoverNode ? 'red' : 'red';
-            // ctx.fill();
-            // }
+      #messageContent {
+        font-family: FavoritReg;
+        font-size: 9pt;
+        position: relative;
+        top: 3px;
+        color: #a9a9a9;
+        margin: 0px;
+      }
 
-            if (highlightNodes.has(node)) {
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              ctx.fillStyle = "red";
-              ctx.fillText(label, node.x, node.y);
-            } else {
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              ctx.fillStyle = "blue";
-              ctx.fillText(label, node.x, node.y);
-            }
+      #messageAge {
+        font-family: Favorit;
+        font-size: 9pt;
+        position: relative;
+        color: #d2d2d2;
+        left: 15px;
+        float: left;
+        margin: 0px;
+      }
 
-            node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
-          })
-          .nodePointerAreaPaint((node, color, ctx) => {
-            ctx.fillStyle = color;
-            const bckgDimensions = node.__bckgDimensions;
-            bckgDimensions &&
-              ctx.fillRect(
-                node.x - bckgDimensions[0] / 2,
-                node.y - bckgDimensions[1] / 2,
-                ...bckgDimensions
-              );
-          });
-      });
-  </script>
-</body>
+      #messageName {
+        font-family: Favorit;
+        font-size: 9pt;
+        position: relative;
+        color: #585858;
+        float: left;
+        margin: 0px;
+      }
+
+      #messageTitle {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 0px;
+      }
+
+      #message {
+        position: relative;
+        display: flex;
+        margin-bottom: 15px;
+        flex-direction: column;
+        /* padding-bottom: 30px; */
+        min-height: 10px;
+        height: auto;
+        width: 345px;
+      }
+
+      #flaggedmessagesFeed::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      #flaggedmessagesFeed {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .pillDesc {
+        font-family: Diatype;
+        font-size: 9pt;
+        position: absolute;
+        top: -2px;
+        right: 12.5px;
+        color: lightgray;
+      }
+
+      .pillTitle {
+        font-family: Favorit;
+        font-size: 11pt;
+        position: absolute;
+        top: -1px;
+        left: 13.5px;
+        color: #3f3f3f;
+      }
+
+      .pillNumber {
+        font-family: Whyte;
+        font-size: 17pt;
+        position: absolute;
+        top: 10px;
+        left: 13.5px;
+        color: #242424;
+      }
+
+      .pillDiff {
+        font-family: Whyte;
+        font-size: 7.5pt;
+        position: absolute;
+        top: 47px;
+        left: 13.5px;
+      }
+
+      .pillDiffGood {
+        color: #00c72c;
+      }
+
+      .pillDiffBad {
+        color: #dd2e44;
+      }
+
+      .pillTitleBig {
+        font-size: 13pt;
+      }
+
+      .pill {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0px lightgray;
+        background-color: white;
+        margin-top: 20px;
+        margin-left: 20px;
+        float: left;
+      }
+
+      .pillDataStandard {
+        width: 248px;
+        height: 139px;
+      }
+
+      .pillFlagged {
+        width: 399px;
+        height: 323px;
+      }
+
+      .pillRelationships {
+        width: 393px;
+        height: 364px;
+      }
+
+      .pillDataCanvas {
+        position: absolute;
+        bottom: -8px;
+        left: -8px;
+      }
+
+      #relationshipGraph {
+        position: absolute;
+      }
+
+      #flaggedmessagesFeed {
+        position: absolute;
+        left: 12px;
+        top: 55px;
+        width: 360px;
+        height: 204px;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        padding-left: 15px;
+        padding-top: 12px;
+        border-radius: 10px;
+        overflow: scroll;
+      }
+
+      .responseBar {
+        position: absolute;
+        background-color: #ffffff;
+        max-width: 375px;
+        max-height: 38px;
+        top: 279px;
+        left: 12px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+
+      ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #bfbfbf;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        background-color: #f9f9f9;
+      }
+
+      input {
+        border: none;
+        width: 158px;
+        background-color: #f9f9f9;
+        font-family: Diatype;
+        color: #bfbfbf;
+        margin-top: 2px;
+        margin-left: 5px;
+        font-size: 12pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="relationshipGraph"></div>
+    <script src="relationships.js" type="text/javascript"></script>
+  </body>
+</html>

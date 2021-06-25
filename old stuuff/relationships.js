@@ -30,8 +30,6 @@ fetch("newdata.json")
     const Graph = ForceGraph()(document.getElementById("relationshipGraph"))
       .graphData(gData)
       .nodeId("id")
-      .width(370)
-      .height(270)
       .backgroundColor("#F9F9F9")
       // .nodeAutoColorBy("group")
       // .nodeRelSize(NODE_R)
@@ -114,8 +112,8 @@ fetch("newdata.json")
             ...bckgDimensions
           );
       });
-    // Graph.width = "370px";
-    // Graph.length = "270px";
+    Graph.width = "370px";
+    Graph.length = "270px";
     // Graph.centerAt(425, 600);
     const pill = document.getElementById("loadingstatus");
     let autoPause = true;
@@ -143,4 +141,21 @@ fetch("newdata.json")
         Graph.pauseAnimation();
       }
     }, 4000);
+
+    let k = 0.5, angle = 0, radius = 300;
+    let zoom = setInterval(() => {
+      // zoom in
+      Graph.zoom(k);
+      k += 0.01 * k * k;
+
+      // pan around
+      // Graph.centerAt(
+      //   radius * Math.cos(angle),
+      //   radius * Math.sin(angle)
+      // );
+      // angle += Math.PI / 300;
+      if (k > 1.8) {
+        clearInterval(zoom);
+      }
+    }, 1);
   });
