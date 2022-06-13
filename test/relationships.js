@@ -30,9 +30,10 @@ fetch("newdata.json")
     const Graph = ForceGraph()(document.getElementById("relationshipGraph"))
       .graphData(gData)
       .nodeId("id")
-      .backgroundColor("#F9F9F9")
+      .backgroundColor("#121212")
       // .nodeAutoColorBy("group")
       // .nodeRelSize(NODE_R)
+      .linkColor(link => "rgba(255, 255, 255, 0.2)" )
       .onNodeHover((node) => {
         highlightNodes.clear();
         highlightLinks.clear();
@@ -72,7 +73,7 @@ fetch("newdata.json")
         const bckgDimensions = [textWidth, fontSize].map(
           (n) => n + fontSize * 0.2
         ); // some padding
-        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
         ctx.fillRect(
           node.x - bckgDimensions[0] / 2,
           node.y - bckgDimensions[1] / 2,

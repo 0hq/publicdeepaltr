@@ -30,8 +30,9 @@ fetch("newdata.json")
     const Graph = ForceGraph()(document.getElementById("relationshipGraph"))
       .graphData(gData)
       .nodeId("id")
-      .width(370)
-      .height(270)
+      .zoom(5)
+      // .width(370)
+      // .height(270)
       .backgroundColor("#F9F9F9")
       // .nodeAutoColorBy("group")
       // .nodeRelSize(NODE_R)
@@ -63,23 +64,15 @@ fetch("newdata.json")
       })
       .linkWidth((link) => (highlightLinks.has(link) ? 5 : 1))
       .linkDirectionalParticles(2)
-      .linkDirectionalParticleWidth((link) =>
-        highlightLinks.has(link) ? 4 : 0
-      )
+      .linkDirectionalParticleWidth((link) => (highlightLinks.has(link) ? 4 : 0))
       .nodeCanvasObject((node, ctx, globalScale) => {
         const label = node.id;
-        const fontSize = 12 / globalScale;
-        ctx.font = `${fontSize}px Diatype`;
+        const fontSize = 15 / globalScale;
+        ctx.font = `${fontSize}px FavoritReg`;
         const textWidth = ctx.measureText(label).width;
-        const bckgDimensions = [textWidth, fontSize].map(
-          (n) => n + fontSize * 0.2
-        ); // some padding
+        const bckgDimensions = [textWidth, fontSize].map((n) => n + fontSize * 0.2); // some padding
         ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-        ctx.fillRect(
-          node.x - bckgDimensions[0] / 2,
-          node.y - bckgDimensions[1] / 2,
-          ...bckgDimensions
-        );
+        ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
         if (highlightNodes.size !== 0) {
           console.log(highlightNodes);
         }
@@ -107,39 +100,31 @@ fetch("newdata.json")
       .nodePointerAreaPaint((node, color, ctx) => {
         ctx.fillStyle = color;
         const bckgDimensions = node.__bckgDimensions;
-        bckgDimensions &&
-          ctx.fillRect(
-            node.x - bckgDimensions[0] / 2,
-            node.y - bckgDimensions[1] / 2,
-            ...bckgDimensions
-          );
+        bckgDimensions && ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
       });
     // Graph.width = "370px";
     // Graph.length = "270px";
-    // Graph.centerAt(425, 600);
+    // Graph.centerAt(0, 0);
     const pill = document.getElementById("loadingstatus");
     let autoPause = true;
     elem.addEventListener("mouseleave", (e) => {
       //   highlightNodes.clear();
       //   highlightLinks.clear();
       document.getElementById("loadingstatus").style.color = "#D09521";
-      document.getElementById("loadingstatus").innerHTML =
-        "Paused <span style='font-size: 6.5pt'>•</span>";
+      document.getElementById("loadingstatus").innerHTML = "Paused <span style='font-size: 6.5pt'>•</span>";
       Graph.pauseAnimation();
       autoPause = false;
     });
     elem.addEventListener("mouseenter", (e) => {
       document.getElementById("loadingstatus").style.color = "#21d048";
-      document.getElementById("loadingstatus").innerHTML =
-        "Live <span style='font-size: 6.5pt'>•</span>";
+      document.getElementById("loadingstatus").innerHTML = "Live <span style='font-size: 6.5pt'>•</span>";
       Graph.resumeAnimation();
       autoPause = false;
     });
     setTimeout(function () {
       if (autoPause) {
         document.getElementById("loadingstatus").style.color = "#D09521";
-        document.getElementById("loadingstatus").innerHTML =
-          "Paused <span style='font-size: 6.5pt'>•</span>";
+        document.getElementById("loadingstatus").innerHTML = "Paused <span style='font-size: 6.5pt'>•</span>";
         Graph.pauseAnimation();
       }
     }, 4000);
