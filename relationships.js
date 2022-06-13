@@ -31,8 +31,6 @@ fetch("newdata.json")
       .graphData(gData)
       .nodeId("id")
       .zoom(5)
-      // .width(370)
-      // .height(270)
       .backgroundColor("#F9F9F9")
       // .nodeAutoColorBy("group")
       // .nodeRelSize(NODE_R)
@@ -102,9 +100,6 @@ fetch("newdata.json")
         const bckgDimensions = node.__bckgDimensions;
         bckgDimensions && ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
       });
-    // Graph.width = "370px";
-    // Graph.length = "270px";
-    // Graph.centerAt(0, 0);
     const pill = document.getElementById("loadingstatus");
     let autoPause = true;
     elem.addEventListener("mouseleave", (e) => {
