@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DeepALTR v1.0</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//unpkg.com/force-graph"></script>
+    <style>
+      @font-face {
+        font-family: Whyte;
+        src: url(test/ABCWhyteEdu-Bold.otf);
+      }
+      @font-face {
+        font-family: WhyteMed;
+        src: url(test/ABCWhyteEdu-Medium.otf);
+      }
+      @font-face {
+        font-family: WhyteBlack;
+        src: url(test/ABCWhyteEdu-Black.otf);
+      }
+
+      @font-face {
+        font-family: Favorit;
+        src: url(test/ABCFavoritEdu-Bold.otf);
+      }
+
+      @font-face {
+        font-family: FavoritReg;
+        src: url(test/ABCFavoritEdu-Regular.otf);
+      }
+
+      @font-face {
+        font-family: Diatype;
+        src: url(test/ABCDiatypeEdu-Regular.otf);
+      }
+
+      canvas#relationshipGraph {
+        background-color: #f9f9f9;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      #relationshipGraph {
+        position: relative;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <!-- <body style="background-color: #e5e5e5"> -->
+  <body>
+    <div width="100%" height="100%" id="relationshipGraph"></div>
+    <script src="relationships.js" type="text/javascript"></script>
+  </body>
+</html>
