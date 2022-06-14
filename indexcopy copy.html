@@ -8,30 +8,30 @@
     <style>
       @font-face {
         font-family: Whyte;
-        src: url(ABCWhyteEdu-Bold.otf);
+        src: url(test/ABCWhyteEdu-Bold.otf);
       }
       @font-face {
         font-family: WhyteMed;
-        src: url(ABCWhyteEdu-Medium.otf);
+        src: url(test/ABCWhyteEdu-Medium.otf);
       }
       @font-face {
         font-family: WhyteBlack;
-        src: url(ABCWhyteEdu-Black.otf);
+        src: url(test/ABCWhyteEdu-Black.otf);
       }
 
       @font-face {
         font-family: Favorit;
-        src: url(ABCFavoritEdu-Bold.otf);
+        src: url(test/ABCFavoritEdu-Bold.otf);
       }
 
       @font-face {
         font-family: FavoritReg;
-        src: url(ABCFavoritEdu-Regular.otf);
+        src: url(test/ABCFavoritEdu-Regular.otf);
       }
 
       @font-face {
         font-family: Diatype;
-        src: url(ABCDiatypeEdu-Regular.otf);
+        src: url(test/ABCDiatypeEdu-Regular.otf);
       }
 
       canvas#relationshipGraph {
@@ -40,14 +40,8 @@
 
       body {
         /* background-color: #e5e5e5; */
-        background: linear-gradient(
-            179.82deg,
-            rgba(255, 255, 248, 0.4) 7.01%,
-            rgba(254, 241, 237, 0.4) 49.08%,
-            rgba(229, 233, 251, 0.4) 99.84%
-          ),
-          linear-gradient(180deg, rgba(255, 255, 255, 0) 9.25%, #ffffff 34.93%),
-          #fefef6;
+        background: linear-gradient(179.82deg, rgba(255, 255, 248, 0.4) 7.01%, rgba(254, 241, 237, 0.4) 49.08%, rgba(229, 233, 251, 0.4) 99.84%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0) 9.25%, #ffffff 34.93%), #fefef6;
         background-attachment: fixed;
         height: 100%;
       }
@@ -294,79 +288,41 @@
       <h1 class="pillNumber">12,893<span style="font-size: 10pt">pts</span></h1>
       <h2 class="pillDiff pillDiffGood">+10% up</h2>
       <h3 class="pillDesc">Last 30 days</h3>
-      <canvas
-        id="useractivityData"
-        height="69px"
-        width="260px"
-        style="position: absolute; bottom: -8px; left: -8px"
-      ></canvas>
+      <canvas id="useractivityData" height="69px" width="260px" style="position: absolute; bottom: -8px; left: -8px"></canvas>
     </div>
     <div id="messageperhourPill" class="pill pillDataStandard">
       <h1 class="pillTitle">Messages/hr</h1>
       <h1 class="pillNumber">23<span style="font-size: 10pt">msg</span></h1>
       <h2 class="pillDiff pillDiffGood">+10% average</h2>
       <h3 class="pillDesc">Current</h3>
-      <canvas
-        id="messageperhourData"
-        height="69px"
-        width="260px"
-        style="position: absolute; bottom: -8px; left: -8px"
-      ></canvas>
+      <canvas id="messageperhourData" height="69px" width="260px" style="position: absolute; bottom: -8px; left: -8px"></canvas>
     </div>
     <div id="serverrankPill" class="pill pillDataStandard">
       <h1 class="pillTitle">Server Ranking</h1>
       <h1 class="pillNumber">904,342<span style="font-size: 10pt">st</span></h1>
       <h2 class="pillDiff pillDiffGood">+1.2% gain</h2>
       <h3 class="pillDesc">Year To Date</h3>
-      <canvas
-        id="serverrankData"
-        height="69px"
-        width="260px"
-        style="position: absolute; bottom: -8px; left: -8px"
-      ></canvas>
+      <canvas id="serverrankData" height="69px" width="260px" style="position: absolute; bottom: -8px; left: -8px"></canvas>
     </div>
     <div id="membercountPill" class="pill pillDataStandard">
       <h1 class="pillTitle">Member Count</h1>
       <h1 class="pillNumber">90,203<span style="font-size: 10pt"></span></h1>
       <h2 class="pillDiff pillDiffBad">-10% down</h2>
       <h3 class="pillDesc">Last 30 days</h3>
-      <canvas
-        id="membercountData"
-        height="69px"
-        width="260px"
-        style="position: absolute; bottom: -8px; left: -8px"
-      ></canvas>
+      <canvas id="membercountData" height="69px" width="260px" style="position: absolute; bottom: -8px; left: -8px"></canvas>
     </div>
     <div id="memberprojPill" class="pill pillDataStandard">
       <h1 class="pillTitle">Member Projections</h1>
-      <h1 class="pillNumber">
-        104,531<span style="font-size: 10pt"> by Sept</span>
-      </h1>
+      <h1 class="pillNumber">104,531<span style="font-size: 10pt"> by Sept</span></h1>
       <h2 class="pillDiff pillDiffGood">+15.8% gain</h2>
       <h3 class="pillDesc">Q4 Results</h3>
-      <canvas
-        id="memberprojData"
-        height="69px"
-        width="260px"
-        class="pillDataCanvas"
-      ></canvas>
+      <canvas id="memberprojData" height="69px" width="260px" class="pillDataCanvas"></canvas>
     </div>
     <div id="flaggedmessagesPill" class="pill pillFlagged">
       <h1 class="pillTitle pillTitleBig">Flagged Messages</h1>
       <h3 class="pillDesc">Live Chat</h3>
-      <div
-        class="slidecontainer"
-        width="133px"
-        style="position: absolute; top: 30px; left: 13.5px"
-      >
-        <input
-          type="range"
-          min="1"
-          max="100"
-          value="72"
-          class="slider"
-          id="myRange"
-        />
+      <div class="slidecontainer" width="133px" style="position: absolute; top: 30px; left: 13.5px">
+        <input type="range" min="1" max="100" value="72" class="slider" id="myRange" />
       </div>
       <div id="flaggedmessagesFeed">
         <div id="message">
@@ -374,20 +330,14 @@
             <h3 id="messageName">Andrew Goodridge</h3>
             <h3 id="messageAge">15 min ago</h3>
           </div>
-          <p id="messageContent">
-            i hope you get vitamin D deficiency fool - this is a generic toxic
-            message that our AI would flag
-          </p>
+          <p id="messageContent">i hope you get vitamin D deficiency fool - this is a generic toxic message that our AI would flag</p>
         </div>
         <div id="message">
           <div id="messageTitle">
             <h3 id="messageName">Fredrick Douglass</h3>
             <h3 id="messageAge">11 min ago</h3>
           </div>
-          <p id="messageContent">
-            i hate you, i want to kill you, give me 200$ dollars is the best dr.
-            phil quote ever. - lol
-          </p>
+          <p id="messageContent">i hate you, i want to kill you, give me 200$ dollars is the best dr. phil quote ever. - lol</p>
         </div>
         <div id="message">
           <div id="messageTitle">
@@ -401,10 +351,7 @@
             <h3 id="messageName">Lords of Plural</h3>
             <h3 id="messageAge">1 min ago</h3>
           </div>
-          <p id="messageContent">
-            Stop being british or I’ll throw your tea into the ocean. - lol no
-            im not joking im being toxic.
-          </p>
+          <p id="messageContent">Stop being british or I’ll throw your tea into the ocean. - lol no im not joking im being toxic.</p>
         </div>
         <div id="message">
           <div id="messageTitle">
@@ -425,10 +372,7 @@
             <h3 id="messageName">FredrickDouglass</h3>
             <h3 id="messageAge">now</h3>
           </div>
-          <p id="messageContent">
-            wow pretty racist you should go evaluate your personal biases
-            motherfucker.
-          </p>
+          <p id="messageContent">wow pretty racist you should go evaluate your personal biases motherfucker.</p>
         </div>
         <div id="message">
           <div id="messageTitle">
@@ -436,94 +380,66 @@
             <h3 id="messageAge">now</h3>
           </div>
           <p id="messageContent">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur.
           </p>
         </div>
-        <div
-          id="message"
-          style="background-color: #ffffff; margin-left: -6px; padding: 6px; border-radius: 5px;"
-        >
+        <div id="message" style="background-color: #ffffff; margin-left: -6px; padding: 6px; border-radius: 5px">
           <div id="messageTitle">
             <h3 id="messageName">Jeffrey Bezos</h3>
             <h3 id="messageAge">now</h3>
           </div>
-          <p id="messageContent">
-            what the fuck dexter - how do you know latin
-          </p>
+          <p id="messageContent">what the fuck dexter - how do you know latin</p>
         </div>
       </div>
       <div id="responseBar" class="responseBar">
         <div
           id="replyBox"
-          style="background-color: #f9f9f9; width: 200px; margin-right: 10px; margin-bottom: 2px; margin-top: 1px;border-radius: 8px; padding-top: 5px; padding: 5px;"
+          style="
+            background-color: #f9f9f9;
+            width: 200px;
+            margin-right: 10px;
+            margin-bottom: 2px;
+            margin-top: 1px;
+            border-radius: 8px;
+            padding-top: 5px;
+            padding: 5px;
+          "
         >
           <input type="text" placeholder="Type reply here..." />
           <img
             class="sendbutton"
             src="paper-plane (1) 1.svg"
             alt="Send reply"
-            style="width:  18px; height: 18px; position: absolute; right: 185px; margin-top: 4px;"
+            style="width: 18px; height: 18px; position: absolute; right: 185px; margin-top: 4px"
           />
           <img
             class="sendbuttonHighlighted"
             src="paper-plane (1) 3.svg"
             alt="Send reply"
-            style="width:  18px; height: 18px; position:absolute; right: 185px; margin-top: 4px; visibility: hidden;"
+            style="width: 18px; height: 18px; position: absolute; right: 185px; margin-top: 4px; visibility: hidden"
           />
         </div>
-        <div id="ok" style="margin-right: 6px;">
-          <img
-            src="Group 49.svg"
-            alt="This message is OK"
-            style="width:  35px; height: 35px;"
-          />
+        <div id="ok" style="margin-right: 6px">
+          <img src="Group 49.svg" alt="This message is OK" style="width: 35px; height: 35px" />
         </div>
         <div id="warn" style="margin-right: 6px">
-          <img
-            src="Group 50.svg"
-            alt="Warn whoever said this"
-            style="width:  35px; height: 35px;"
-          />
+          <img src="Group 50.svg" alt="Warn whoever said this" style="width: 35px; height: 35px" />
         </div>
         <div id="delete" style="margin-right: 6px">
-          <img
-            src="Group 51.svg"
-            alt="Delete this message"
-            style="width:  35px; height: 35px;"
-          />
+          <img src="Group 51.svg" alt="Delete this message" style="width: 35px; height: 35px" />
         </div>
         <div id="mute" style="margin-right: 6px">
-          <img
-            src="Group 52.svg"
-            alt="Mute whoever said this for 15 min"
-            style="width:  35px; height: 35px;"
-          />
+          <img src="Group 52.svg" alt="Mute whoever said this for 15 min" style="width: 35px; height: 35px" />
         </div>
       </div>
     </div>
     <div id="relationshipsPill" class="pill pillRelationships">
       <h1 class="pillTitle">Relationship Analysis</h1>
-      <h1 class="pillNumber">
-        4,503<span style="font-size: 10pt"> links</span>
-      </h1>
+      <h1 class="pillNumber">4,503<span style="font-size: 10pt"> links</span></h1>
       <h2 class="pillDiff pillDiffGood">+203 links &nbsp; +5 nodes</h2>
-      <h2
-        id="loadingstatus"
-        style="
-          font-family: Whyte;
-          font-size: 7.5pt;
-          position: absolute;
-          top: 55px;
-          right: 13.5px;
-          color: #21d048;
-          opacity: 0.5;
-        "
-      >
+      <h2 id="loadingstatus" style="font-family: Whyte; font-size: 7.5pt; position: absolute; top: 55px; right: 13.5px; color: #21d048; opacity: 0.5">
         Live <span style="font-size: 6.5pt">•</span>
       </h2>
       <h3 class="pillDesc">Last two weeks</h3>
@@ -581,13 +497,7 @@
         fillcolor: "#FFC6C6",
         dash: [10, 5],
       };
-      var pills = [
-        messageHr,
-        userActivity,
-        serverRank,
-        memberCount,
-        memberProjections,
-      ];
+      var pills = [messageHr, userActivity, serverRank, memberCount, memberProjections];
       for (pill of pills) {
         var pillData = pill.data;
         var pillLineColor = pill.linecolor;
@@ -614,8 +524,7 @@
             smallest = point;
           }
         }
-        var clearancepercent =
-          pill.clearance !== undefined ? pill.clearance : 0.2;
+        var clearancepercent = pill.clearance !== undefined ? pill.clearance : 0.2;
         var range = largest - smallest;
         var clearance = largest * 0.05;
         var shiftup = range * 0.5;
